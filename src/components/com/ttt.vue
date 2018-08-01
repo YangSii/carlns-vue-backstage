@@ -136,24 +136,40 @@ export default {
     },
     // 审核通过
     pass (id, tab) {
-      if (tab === 1) {
-        this.id = id
-        this.tab = tab
-        this.uploadPay = true
-      } else {
-        this.$http.get(url + 'admin/passAudit', {
-          params: {
-            token: sessionStorage.getItem('userId'),
-            logtab: tab,
-            id: id
-          }
-        }).then(res => {
-          // console.log(res.data)
-          if (res.data.code === 200) {
-            this.$emit('refresh', false)
-          }
+      this.$confirm('', '确定要通过审核', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+        center: true
+      }).then(() => {
+        if (tab === 1) {
+          this.id = id
+          this.tab = tab
+          this.uploadPay = true
+        } else {
+          this.$http.get(url + 'admin/passAudit', {
+            params: {
+              token: sessionStorage.getItem('userId'),
+              logtab: tab,
+              id: id
+            }
+          }).then(res => {
+            // console.log(res.data)
+            if (res.data.code === 200) {
+              this.$emit('refresh', false)
+              this.$message({
+                type: 'success',
+                message: '通过审核成功'
+              })
+            }
+          })
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消通过审核'
         })
-      }
+      })
     },
     // 删除
     open7 (tab, id) {
