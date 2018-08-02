@@ -164,7 +164,7 @@
       </el-checkbox-group>
       <el-form :model="form" style="margin-top: 20px;">
         <el-form-item label="备注" :label-width="formLabelWidth1">
-          <el-input type="textarea" v-model="form.beizhu" maxlength="246"></el-input>
+          <el-input type="textarea" v-model="form.beizhu" maxlength="10"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -306,7 +306,7 @@ export default {
     },
     nextPage () {
       if (!this.form.desc) {
-        this.form.desc = 0.08
+        this.form.desc = 0.085
       }
       this.$http.get(url + 'channel/examinationApproval', {
         params: {
