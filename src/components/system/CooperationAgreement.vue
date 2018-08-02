@@ -68,7 +68,7 @@ export default {
         } else {
           this.name = this.file.name
           this.imgchange = {
-            'background': '#fff'
+            'background-image': 'url(/static/img/pdf.png)'
           }
         }
       } else {

@@ -165,24 +165,31 @@ export default {
       window.history.go(-1)
     },
     permissionSubmit () {
-      var remark = ''
-      this.checkboxGroup1.forEach(v => {
-        remark += v + ','
-      })
-      this.centerDialogVisible = false
-      this.$http.get(url + 'admin/failurePassAudit', {
-        params: {
-          token: sessionStorage.getItem('userId'),
-          logtab: this.$route.query.tab,
-          id: this.$route.query.id,
-          remarks: remark + this.form.beizhu
-        }
-      }).then(res => {
-        // console.log(res.data)
-        if (res.data.code === 200) {
-          window.history.go(-1)
-        }
-      })
+      if (this.checkboxGroup1 === '') {
+        this.$message({
+          type: 'info',
+          message: '请填写理由'
+        })
+      } else {
+        var remark = ''
+        this.checkboxGroup1.forEach(v => {
+          remark += v + ','
+        })
+        this.centerDialogVisible = false
+        this.$http.get(url + 'admin/failurePassAudit', {
+          params: {
+            token: sessionStorage.getItem('userId'),
+            logtab: this.$route.query.tab,
+            id: this.$route.query.id,
+            remarks: remark + this.form.beizhu
+          }
+        }).then(res => {
+          // console.log(res.data)
+          if (res.data.code === 200) {
+            window.history.go(-1)
+          }
+        })
+      }
     },
     numberChange (data) {
       data.target.parentNode.nextSibling.disabled = false

@@ -306,7 +306,7 @@ export default {
     },
     nextPage () {
       if (!this.form.desc) {
-        this.form.desc = 0.085
+        this.form.desc = 8.5
       }
       this.$http.get(url + 'channel/examinationApproval', {
         params: {
@@ -324,26 +324,33 @@ export default {
       })
     },
     permissionSubmit () {
-      var remark = ''
-      this.checkboxGroup1.forEach(v => {
-        remark += v + ','
-      })
-      this.centerDialogVisible = false
-      // http://192.168.1.110:80/channel/failurePassAudit?token=abcdef-1231-eqre&account=图片不清晰 查询不到&phone=13061903645&channelName=太阳企业
-      this.$http.get(url + 'channel/failurePassAudit', {
-        params: {
-          'token': sessionStorage.getItem('userId'),
-          'account': remark + this.form.beizhu,
-          'phone': this.Data.phone,
-          'channelName': this.Data.enterpriseName,
-          'channelid': this.Data.id
-        }
-      }).then(res => {
-        // console.log(res.data)
-        if (res.data.code === 200) {
-          window.history.go(-1)
-        }
-      })
+      if (this.checkboxGroup1 === '') {
+        this.$message({
+          type: 'info',
+          message: '请填写理由'
+        })
+      } else {
+        var remark = ''
+        this.checkboxGroup1.forEach(v => {
+          remark += v + ','
+        })
+        this.centerDialogVisible = false
+        // http://192.168.1.110:80/channel/failurePassAudit?token=abcdef-1231-eqre&account=图片不清晰 查询不到&phone=13061903645&channelName=太阳企业
+        this.$http.get(url + 'channel/failurePassAudit', {
+          params: {
+            'token': sessionStorage.getItem('userId'),
+            'account': remark + this.form.beizhu,
+            'phone': this.Data.phone,
+            'channelName': this.Data.enterpriseName,
+            'channelid': this.Data.id
+          }
+        }).then(res => {
+          // console.log(res.data)
+          if (res.data.code === 200) {
+            window.history.go(-1)
+          }
+        })
+      }
     },
     back () {
       window.history.go(-1)

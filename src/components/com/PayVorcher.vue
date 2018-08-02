@@ -6,7 +6,7 @@
         <h2>上传付款计划表</h2>
         <div class="con">
           <div class="up_pdf" :style="backchange">
-            {{name}}
+            <!-- {{name}} -->
             <input type="file" @change="uploadFile($event)" accept=".pdf">
           </div>
           <span>付款计划表的格式为PDF</span>
@@ -50,7 +50,7 @@ export default {
         } else {
           this.name = this.file.name
           this.backchange = {
-            'background': '#fff'
+            'background-image': 'url(/static/img/pdf.png)'
           }
         }
       } else {
