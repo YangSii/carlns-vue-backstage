@@ -164,7 +164,7 @@
       </el-checkbox-group>
       <el-form :model="form" style="margin-top: 20px;">
         <el-form-item label="备注" :label-width="formLabelWidth1">
-          <el-input type="textarea" v-model="form.beizhu" maxlength="10"></el-input>
+          <el-input type="textarea" v-model="form.beizhu" maxlength="20"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -324,7 +324,7 @@ export default {
       })
     },
     permissionSubmit () {
-      if (this.checkboxGroup1 === '') {
+      if (this.checkboxGroup1.length === 0) {
         this.$message({
           type: 'info',
           message: '请填写理由'
@@ -335,11 +335,12 @@ export default {
           remark += v + ','
         })
         this.centerDialogVisible = false
-        // http://192.168.1.110:80/channel/failurePassAudit?token=abcdef-1231-eqre&account=图片不清晰 查询不到&phone=13061903645&channelName=太阳企业
+        // http://192.168.1.110:80/channel/failurePassAudit?token=abcdef-1231-eqre&account=图片不清晰,查询不到,&phone=13061903645&channelName=太阳企业
         this.$http.get(url + 'channel/failurePassAudit', {
           params: {
             'token': sessionStorage.getItem('userId'),
-            'account': remark + this.form.beizhu,
+            'account': remark,
+            'remark': this.form.beizhu,
             'phone': this.Data.phone,
             'channelName': this.Data.enterpriseName,
             'channelid': this.Data.id

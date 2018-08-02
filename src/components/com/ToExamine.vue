@@ -65,11 +65,11 @@
               <div>营业执照：</div>
               <div class="img" :style="imgChange1"><a :href="url + Data.pYImage" target="_blank"></a></div>
             </div>
-            <div class="pic" v-if="driving">
+            <div class="pic" v-if="Data.pCertification">
               <div>购车发票：</div>
               <div class="img" :style="imgChange2"><a :href="url + Data.pGImage" target="_blank"></a></div>
             </div>
-            <div class="pic" v-if="!driving">
+            <div class="pic" v-if="Data.pLicenseNumber">
               <div>机动车行驶证：</div>
               <div class="img" :style="imgChange3"><a :href="url + Data.pJImage" target="_blank"></a></div>
             </div>
@@ -101,7 +101,7 @@
             </el-checkbox-group>
             <el-form :model="form" style="margin-top: 20px;">
               <el-form-item label="备注" :label-width="formLabelWidth">
-                <el-input type="textarea" v-model="form.beizhu" maxlength="246"></el-input>
+                <el-input type="textarea" v-model="form.beizhu" maxlength="20"></el-input>
               </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -165,7 +165,7 @@ export default {
       window.history.go(-1)
     },
     permissionSubmit () {
-      if (this.checkboxGroup1 === '') {
+      if (this.checkboxGroup1.length === 0) {
         this.$message({
           type: 'info',
           message: '请填写理由'
@@ -181,7 +181,8 @@ export default {
             token: sessionStorage.getItem('userId'),
             logtab: this.$route.query.tab,
             id: this.$route.query.id,
-            remarks: remark + this.form.beizhu
+            remarks: remark,
+            remark: this.form.beizhu
           }
         }).then(res => {
           // console.log(res.data)
