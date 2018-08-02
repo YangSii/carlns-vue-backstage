@@ -110,34 +110,33 @@ export default {
     },
     // 审核不通过
     notPass () {
-      console.log(this.checkboxGroup1)
-      // if (this.checkboxGroup1 === '') {
-      //   this.$message({
-      //     type: 'info',
-      //     message: '请填写理由'
-      //   })
-      // } else {
-      //   // /admin/failurePassAudit?token=abcdef-1231-eqre&logtab=1&id=59&remarks=
-      //   var remark = ''
-      //   this.checkboxGroup1.forEach(v => {
-      //     remark += v + ','
-      //   })
-      //   this.centerDialogVisible = false
-      //   this.$http.get(url + 'admin/failurePassAudit', {
-      //     params: {
-      //       token: sessionStorage.getItem('userId'),
-      //       logtab: this.tab,
-      //       id: this.id,
-      //       remarks: remark,
-      //       remark: this.form.beizhu
-      //     }
-      //   }).then(res => {
-      //     // console.log(res.data)
-      //     if (res.data.code === 200) {
-      //       this.$emit('notpass')
-      //     }
-      //   })
-      // }
+      if (this.checkboxGroup1.length === 0) {
+        this.$message({
+          type: 'info',
+          message: '请填写理由'
+        })
+      } else {
+        // /admin/failurePassAudit?token=abcdef-1231-eqre&logtab=1&id=59&remarks=
+        var remark = ''
+        this.checkboxGroup1.forEach(v => {
+          remark += v + ','
+        })
+        this.centerDialogVisible = false
+        this.$http.get(url + 'admin/failurePassAudit', {
+          params: {
+            token: sessionStorage.getItem('userId'),
+            logtab: this.tab,
+            id: this.id,
+            remarks: remark,
+            remark: this.form.beizhu
+          }
+        }).then(res => {
+          // console.log(res.data)
+          if (res.data.code === 200) {
+            this.$emit('notpass')
+          }
+        })
+      }
     },
     PayVorcher () {
       this.uploadPay = false

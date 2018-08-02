@@ -81,7 +81,7 @@
               <div>法人身份证(反)：</div>
               <div class="img" :style="imgChange5"><a :href="url + Data.pFimagefan" target="_blank"></a></div>
             </div>
-            <div class="pic" v-if="Data.pScheduleImage">
+            <div class="pic" v-if="Data.pScheduleImage"  style="background-image: url(/static/img/pdf.png)">
               <div>付款计划表：</div>
               <div class="img"><a :href="url + Data.pScheduleImage" target="_blank">查看付款计划表</a></div>
             </div>
