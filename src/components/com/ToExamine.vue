@@ -231,7 +231,7 @@ export default {
     numKeyUp () {},
     yearNumber (e, data) {
       this.Data.pYearsNubmer = data
-      if (data === '1') {
+      if (data === 1) {
         e.target.style.borderColor = 'rgb(46, 146, 255)'
         e.target.nextElementSibling.style.borderColor = '#ccc'
         this.monArr = ['12']

@@ -181,7 +181,7 @@ export default {
     },
     yearNumber (e, data) {
       this.Data.yearsNubmer = data
-      if (data === '1') {
+      if (data === 1) {
         e.target.style.borderColor = 'rgb(46, 146, 255)'
         e.target.nextElementSibling.style.borderColor = '#ccc'
         this.monArr = ['12']
@@ -210,7 +210,7 @@ export default {
           document.getElementById('one').style.borderColor = 'rgb(46, 146, 255)'
           document.getElementById('three').style.borderColor = '#ccc'
           this.monArr = [12]
-        } else {
+        } else if (this.Data.yearsNubmer === 3) {
           document.getElementById('three').style.borderColor = 'rgb(46, 146, 255)'
           document.getElementById('one').style.borderColor = '#ccc'
           this.monArr = [12, 18, 24, 36]

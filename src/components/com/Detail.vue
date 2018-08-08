@@ -53,7 +53,7 @@
         </div>
         <div class="pic_ele" v-if="Data.hImage || Data.pHImage">
           <div class="pic_txt">代理商合作协议： </div>
-          <div class="pic_pic" style="background-image: url(/static/img/pdf.png)">
+          <div class="pic_pic" style="background-image: url(/static/img/pdf.png);background-size: cover;">
             <a v-if="Data.hImage" :href="url + Data.hImage" target="_blank" style="line-height: 80px;">查看详情</a>
             <a v-if="Data.pHImage" :href="url + Data.pHImage" target="_blank" style="line-height: 80px;">查看详情</a>
             <!-- <img v-if="Data.hImage" class="pic_img" :src="url + Data.hImage" alt="">
